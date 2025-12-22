@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>가족 테이블톡 👨‍👩‍👧‍👦</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Apple SD Gothic Neo', sans-serif;
+            background: linear-gradient(135deg, #faf5ff 0%, #e0e7ff 50%, #dbeafe 100%);
+            min-height: 100vh;
+            padding: 24px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+
+        .users-icon {
+            width: 40px;
+            height: 40px;
+            color: #a855f7;
+            margin: 0 auto 12px;
+            display: block;
+        }
+
+        h1 {
+            font-size: 36px;
+            color: #1f2937;
+            margin-bottom: 8px;
+            font-weight: 700;
+        }
+
+        .subtitle {
+            color: #6b7280;
+            font-size: 16px;
+        }
+
+        .question-card {
+            background: white;
+            border-radius: 24px;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            padding: 48px 32px;
+            margin-bottom: 24px;
+            min-height: 320px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            border: 4px solid #e9d5ff;
+        }
+
+        .question-badge {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 9999px;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 24px;
+            background: #f3e8ff;
+            color: #7c3aed;
+        }
+
+        .question-text {
+            font-size: 28px;
+            font-weight: 500;
+            color: #1f2937;
+            line-height: 1.5;
+            text-align: center;
+        }
+
+        .next-button {
+            width: 100%;
+            padding: 20px;
+            border-radius: 16px;
+            font-weight: 700;
+            color: white;
+            font-size: 18px;
+            background: linear-gradient(135deg, #a855f7 0%, #6366f1 100%);
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        .next-button:hover {
+            background: linear-gradient(135deg, #9333ea 0%, #4f46e5 100%);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .next-button:active {
+            transform: translateY(0);
+        }
+
+        .progress-info {
+            text-align: center;
+            margin-top: 24px;
+            font-size: 14px;
+            color: #6b7280;
+        }
+
+        .tips-card {
+            margin-top: 32px;
+            background: white;
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .tips-title {
+            font-weight: 700;
+            color: #1f2937;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 16px;
+        }
+
+        .sparkle-icon {
+            width: 18px;
+            height: 18px;
+            color: #a855f7;
+        }
+
+        .tips-list {
+            list-style: none;
+        }
+
+        .tips-list li {
+            padding: 8px 0;
+            font-size: 14px;
+            color: #6b7280;
+        }
+
+        .love-note {
+            margin-top: 24px;
+            text-align: center;
+            font-size: 12px;
+            color: #9ca3af;
+        }
+
+        .icon {
+            width: 24px;
+            height: 24px;
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 28px;
+            }
+
+            .question-text {
+                font-size: 22px;
+            }
+
+            .question-card {
+                padding: 32px 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <svg class="users-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                <circle cx="9" cy="7" r="4"/>
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+            </svg>
+            <h1>가족 테이블톡</h1>
+            <p class="subtitle">우리 가족의 이야기를 나누는 시간</p>
+        </div>
+
+        <!-- Question Card -->
+        <div class="question-card">
+            <div style="text-align: center;">
+                <span class="question-badge" id="questionBadge">질문 1 / 60</span>
+                <p class="question-text" id="questionText">어렸을 때 가장 기억에 남는 가족 여행은?</p>
+            </div>
+        </div>
+
+        <!-- Next Button -->
+        <button class="next-button" onclick="getRandomQuestion()">
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="23 4 23 10 17 10"/>
+                <polyline points="1 20 1 14 7 14"/>
+                <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/>
+            </svg>
+            다음 질문
+        </button>
+
+        <!-- Progress Info -->
+        <div class="progress-info" id="progressInfo"></div>
+
+        <!-- Tips Card -->
+        <div class="tips-card">
+            <h3 class="tips-title">
+                <svg class="sparkle-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 2v4m0 12v4M4.93 4.93l2.83 2.83m8.48 8.48l2.83 2.83M2 12h4m12 0h4M4.93 19.07l2.83-2.83m8.48-8.48l2.83-2.83"/>
+                </svg>
+                사용 팁
+            </h3>
+            <ul class="tips-list">
+                <li>• 세대를 넘어 서로의 이야기를 들어보세요</li>
+                <li>• 어른들의 옛날 이야기도 소중한 추억이 됩니다</li>
+                <li>• 아이들의 솔직한 생각도 경청해주세요</li>
+                <li>• 웃음과 따뜻함이 가득한 시간을 만들어보세요</li>
+                <li>• 가족의 역사와 가치를 함께 나눠보세요</li>
+            </ul>
+        </div>
+
+        <!-- Love Note -->
+        <div class="love-note">
+            <p>💜 소중한 가족과의 따뜻한 시간을 응원합니다 💜</p>
+        </div>
+    </div>
+
+    <script>
+        const questions = [
+            // 기존 질문들
+            "어렸을 때 가장 기억에 남는 가족 여행은?",
+            "우리 가족만의 특별한 전통이 있다면?",
+            "가족 중에서 누구를 가장 닮았다고 생각해?",
+            "어렸을 때 가장 말썽 부렸던 에피소드는?",
+            "가족들에게 감사하지만 말하지 못했던 것은?",
+            "우리 가족이 함께 꼭 가보고 싶은 곳은?",
+            "엄마/아빠의 어린 시절 이야기를 듣고 싶어요",
+            "가족 중 누구의 요리가 가장 생각나?",
+            "어렸을 때 받았던 가장 기억에 남는 선물은?",
+            "가족과 함께 새롭게 시작하고 싶은 취미는?",
+            "우리 집에서 가장 웃겼던 사건은?",
+            "부모님께 물려받고 싶은 습관이나 가치관은?",
+            "가족 모임에서 꼭 먹고 싶은 음식은?",
+            "형제/자매와의 가장 재미있었던 추억은?",
+            "어렸을 때 가장 좋아했던 놀이는?",
+            "우리 가족을 동물로 표현한다면 각각 무엇일까?",
+            "할아버지/할머니에 대한 특별한 기억은?",
+            "가족 중 누구에게 가장 많이 배웠어?",
+            "우리 가족이 함께 도전해보고 싶은 것은?",
+            "어린 시절 집에서 가장 좋아했던 공간은?",
+            "부모님의 사랑을 느꼈던 순간은?",
+            "형제자매가 있어서 좋았던/없어서 아쉬웠던 점은?",
+            "가족에게 꼭 전하고 싶은 말이 있다면?",
+            "우리 가족이 가장 단합되는 순간은?",
+            "어렸을 때 부모님이 해주셨던 말 중 기억나는 것은?",
+            "가족과 함께 만들고 싶은 새로운 추억은?",
+            "우리 집만의 특별한 규칙이나 말이 있다면?",
+            "10년 후 우리 가족은 어떤 모습일까?",
+            "가족에게 받은 최고의 조언은?",
+            "다음 세대에게 물려주고 싶은 우리 가족만의 가치는?",
+            
+            // 크리스마스 특별 질문들
+            "올해 우리 가족에게 일어난 가장 좋았던 일은?",
+            "가족 중 누구의 어릴 적 꿈은 무엇이었나요?",
+            "우리 가족이 함께 보낸 크리스마스 중 기억에 남는 순간은?",
+            "부모님(조부모님)이 젊었을 때는 어떤 분이셨어요?",
+            "가족 사진 중 가장 마음에 드는 사진과 그 이유는?",
+            "온 가족이 함께 웃었던 최근의 일은?",
+            "우리 집에서 크리스마스 때 꼭 먹는 음식이 있다면?",
+            "가족 중 누가 산타클로스 역할을 가장 잘 어울릴까?",
+            "올해 가족 각자에게 어떤 일이 있었는지 들려주세요",
+            "가족끼리 함께 보고 싶은 영화나 공연이 있나요?",
+            "어렸을 때 부모님이 들려주셨던 이야기 중 기억나는 게 있나요?",
+            "우리 가족만 아는 재미있는 별명이나 호칭이 있다면?",
+            "가족 중 누구의 성격이나 행동이 가장 독특한가요?",
+            "내년 새해에 가족과 함께 이루고 싶은 목표는?",
+            "가족이 모였을 때 가장 자주 나오는 대화 주제는?",
+            "부모님께 배운 것 중 가장 유용한 것은?",
+            "가족 중 누구와 가장 비슷한 성격을 가졌나요?",
+            "명절이나 기념일에 우리 가족만의 특별한 의식이 있나요?",
+            "가족과 함께하는 시간 중 가장 행복한 순간은?",
+            "우리 가족의 장점을 세 가지만 말해본다면?",
+            "가족 중 누구에게 배우고 싶은 것이 있나요?",
+            "어렸을 때와 지금, 가족에 대한 생각이 어떻게 달라졌나요?",
+            "가족이 힘들 때 서로를 어떻게 위로하나요?",
+            "우리 가족이 함께 만든 가장 자랑스러운 순간은?",
+            "가족끼리 함께 배우고 싶은 새로운 것이 있다면?",
+            "올해 가족에게 고마웠던 구체적인 순간이 있나요?",
+            "우리 가족의 크리스마스 소원은 무엇인가요?",
+            "가족과 함께 지키고 싶은 연말연시 전통을 만든다면?",
+            "내년에 가족과 꼭 함께하고 싶은 일이 있나요?",
+            "지금 이 순간, 가족과 함께 있어서 드는 생각은?"
+        ];
+
+        let currentQuestion = 0;
+        let usedQuestions = new Set();
+
+        function updateDisplay() {
+            document.getElementById('questionText').textContent = questions[currentQuestion];
+            document.getElementById('questionBadge').textContent = `질문 ${currentQuestion + 1} / ${questions.length}`;
+            
+            if (usedQuestions.size > 0) {
+                document.getElementById('progressInfo').textContent = 
+                    `지금까지 ${usedQuestions.size}개의 질문을 나눴어요 👨‍👩‍👧‍👦`;
+            }
+        }
+
+        function getRandomQuestion() {
+            if (usedQuestions.size === questions.length) {
+                usedQuestions.clear();
+            }
+
+            let newIndex;
+            do {
+                newIndex = Math.floor(Math.random() * questions.length);
+            } while (usedQuestions.has(newIndex) && usedQuestions.size < questions.length);
+
+            usedQuestions.add(newIndex);
+            currentQuestion = newIndex;
+            updateDisplay();
+        }
+
+        // 초기 표시
+        updateDisplay();
+    </script>
+</body>
+</html>
